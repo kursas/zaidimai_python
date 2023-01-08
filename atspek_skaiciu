@@ -1,0 +1,113 @@
+#zaidimo esme:pirmam lygyje turi astet skaiciu nuo 1 iki 10 is 4  bandymu,antrame nuo 1 iki 100 is 7 bandymu....enjoy
+#!/usr/bin/env python
+# -*- coding: windows-1255 -*-
+import random
+
+
+def game(pmax, n):
+    print("atspek skaiciu nuo 1 iki ", n, " per tiek ", pmax, " spejimu!!")
+    a = random.randint(1, n)
+    b = -1
+    p = 1
+    while a != b:
+        b = int(input("jusu variantas = "))
+        p = p + 1
+        if b < a:
+            print("daugiau")
+        elif b > a:
+            print("maziau")
+        else:
+            print("atspejai is tiek ", p-1, " kartu")
+    if p-1 <= pmax:
+        print("Laimejot si lygi,jega!")
+        rez = 1
+    else:
+        print("Pralaimejot. Zaiskim naujai si lygi!.")
+        rez = 0
+    return rez
+
+
+print("Zaidimas-ATSPEK SKAICIU!!")
+
+print("LYGIS 1")
+win = 0
+while win == 0:
+    win = game(4, 10)
+
+print("LYGIS 2")
+win = 0
+while win == 0:
+    win = game(7, 100)
+
+print("LYGIS 3")
+win = 0
+while win == 0:
+    win = game(10, 1000)
+print("Zaidimas baigtas")
+
+#output
+Zaidimas-ATSPEK SKAICIU!!
+LYGIS 1
+atspek skaiciu nuo 1 iki  10  per tiek  4  spejimu!!
+jusu variantas = 1
+daugiau
+jusu variantas = 2
+daugiau
+jusu variantas = 3
+daugiau
+jusu variantas = 4
+daugiau
+jusu variantas = 5
+daugiau
+jusu variantas = 7
+daugiau
+jusu variantas = 9
+daugiau
+jusu variantas = 10
+atspejai is tiek  8  kartu
+Pralaimejot. Zaiskim naujai si lygi!.
+atspek skaiciu nuo 1 iki  10  per tiek  4  spejimu!!
+jusu variantas = 5
+daugiau
+jusu variantas = 7
+daugiau
+jusu variantas = 9
+daugiau
+jusu variantas = 10
+atspejai is tiek  4  kartu
+Laimejot si lygi,jega!
+LYGIS 2
+atspek skaiciu nuo 1 iki  100  per tiek  7  spejimu!!
+jusu variantas = 50
+daugiau
+jusu variantas = 70
+maziau
+jusu variantas = 60
+maziau
+jusu variantas = 55
+maziau
+jusu variantas = 53
+daugiau
+jusu variantas = 54
+atspejai is tiek  6  kartu
+Laimejot si lygi,jega!
+LYGIS 3
+atspek skaiciu nuo 1 iki  1000  per tiek  10  spejimu!!
+jusu variantas = 550
+daugiau
+jusu variantas = 800
+daugiau
+jusu variantas = 950
+maziau
+jusu variantas = 900
+maziau
+jusu variantas = 870
+maziau
+jusu variantas = 850
+maziau
+jusu variantas = 830
+atspejai is tiek  7  kartu
+Laimejot si lygi,jega!
+Zaidimas baigtas
+
+Process finished with exit code 0
