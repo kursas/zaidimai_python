@@ -1,0 +1,111 @@
+# -*- coding: utf-8 -*-
+import io
+cityes_old = []
+symbols_bad = {"ь", "ъ", "ы", "ц", "й"}
+
+
+text1 = io.open("D://DUMENYS//DARIUS//Desktop//goroda.txt",encoding='utf-8')
+cityes = []
+for i in text1:
+    cityes.append(i)
+
+for i in range(len(cityes)):
+    if cityes[i][-1] == "\n":
+        cityes[i] = cityes[i][:-1]
+
+cityes_all = cityes.copy()
+
+game_over = False
+
+print("Zaidimas-atspek rusiska miesta!.Reikia ivesti rusiska miesta "
+      "\nis failo goroda.txt,kompiuteris pats nurodys is kokios raides reikes ivesti miesta."
+      "\nKad atvazduotu rusiskas raides PyCharm programoje "
+      "\natlikite sekanti veiksma:File-->Settings-->Editor-->File Encoding-->Global Encoding::UTF-8-->Project Encoding::UTF-8-->Apply-->Ok. "
+      "\nKad uzbaigti zzaidima iveskite zodi- stop")
+
+city = 'Москва'
+print(city)
+s_end = 'a'
+step = 'human'
+cityes_old.append(city)
+s_end = city[-1]
+
+while game_over == False:
+
+    if step == 'human':
+
+        correct = False
+        while correct == False:
+
+            city = input("Iveskite jusu miesta: is tokios raides: " + s_end + ". Jusu miestas: ")
+            if city == "stop":
+                game_over = True
+                correct = True
+            else:
+                correct = True
+                # Patikrinimas miesto del reikiamos raides
+                if city[0].lower() != s_end:
+                    correct = False
+                    print("Neteisinga. Ivardikite miesta is raides:", s_end)
+
+                # patikrinti,kad toks miestas yra
+                if city in set(cityes_all):
+                    pass
+                else:
+                    correct = False
+                    print("Neteisinga. Tokio miesto nera!")
+
+
+                    #patikrinti kad anksciau tokio miesto neivardinot
+                if city in set(cityes_old):
+                    correct = False
+                    print("Neteisinga. Toki miesta jau ivardinot!")
+
+        step = 'AI'
+    else:
+
+        city = ''
+        for city_next in cityes:
+            if city_next[0].lower() == s_end:
+                city = city_next
+
+        if city == '':
+            print('Laimejai!')
+            print('Miesto nera is tokios raides:', s_end)
+            game_over = True
+        else:
+            print(city)
+
+        step = 'human'
+
+    if game_over == False:
+        cityes.remove(city)
+        cityes_old.append(city)
+
+        s_end = city[-1]
+        if s_end in symbols_bad:
+            s_end = city[-2]
+
+        if s_end in symbols_bad:
+            s_end = city[-3]
+    else:
+        pass
+
+print('Zaidimas baigtas!')
+print('Ivardintas miestu skaicius ', len(cityes_old), " is tiek miestu: ", len(cityes_all))
+#output
+Zaidimas-atspek rusiska miesta!.Reikia ivesti rusiska miesta 
+is failo goroda.txt,kompiuteris pats nurodys is kokios raides reikes ivesti miesta.
+Kad atvazduotu rusiskas raides PyCharm programoje 
+atlikite sekanti veiksma:File-->Settings-->Editor-->File Encoding-->Global Encoding::UTF-8-->Project Encoding::UTF-8-->Apply-->Ok. 
+Kad uzbaigti zzaidima iveskite zodi- stop
+Москва
+Iveskite jusu miesta: is tokios raides: а. Jusu miestas: Анапа
+Ачинск
+Iveskite jusu miesta: is tokios raides: к. Jusu miestas: Клин
+Нягань
+Iveskite jusu miesta: is tokios raides: н. Jusu miestas: stop
+Zaidimas baigtas!
+Ivardintas miestu skaicius  5  is tiek miestu:  322
+
+Process finished with exit code 0
